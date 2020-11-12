@@ -10,14 +10,16 @@ import { Dimensions } from "react-native";
 const { width } = Dimensions.get("window");
 
 import Home from "../screens/Home";
+import DateSelector from "../screens/DateSelector"
 
 const MainStack = createStackNavigator(
   {
-    Home: { screen: Home }
+    Home: { screen: Home },
+    DateSelector: { navigationOptions: { title: 'Booking Time', headerBackTitleVisible: false }, screen: DateSelector }
   },
   {
     initialRouteName: "Home",
-    headerMode: "none"
+    headerMode: "screen"
   }
 );
 

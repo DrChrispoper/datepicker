@@ -1,11 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function App() {
+export default function App({ navigation }) {
+
+  const onPressLearnMore = () => {
+    navigation.navigate('DateSelector')
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Your Date!</Text>
-      <Text>Select Date!</Text>
+      <Text>You don't have a booking yet</Text>
+      <Button  onPress={onPressLearnMore}  title="Book Now" accessibilityLabel="Book your appointment"/>
     </View>
   );
 }
