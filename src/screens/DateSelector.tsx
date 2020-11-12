@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DatePicker from '../containers/DatePicker';
-import Times from '../containers/Times';
+import TimePicker from '../containers/TimePicker';
 import Footer from '../containers/Footer';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <DatePicker />
-      <Times />
+      <TimePicker />
       <Footer />
     </View>
   );
