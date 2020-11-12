@@ -1,10 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import DatePicker from '../containers/DatePicker';
+import Times from '../containers/Times';
+import Footer from '../containers/Footer';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Select Date!</Text>
+      <DatePicker />
+      <Times />
+      <Footer />
     </View>
   );
 }
