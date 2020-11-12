@@ -1,9 +1,12 @@
 import { UserState, UserActionTypes } from './types';
 import { UserActionInterfaces } from './actions';
 import { Reducer } from 'redux';
+import moment from 'moment';
 
 const INIT_STATE: UserState = {
-  booking: '',
+  booked: false,
+  date: `${moment().dayOfYear()}`,
+  time: '',
 };
 
 const reducer: Reducer<UserState, UserActionInterfaces> = (
@@ -11,10 +14,20 @@ const reducer: Reducer<UserState, UserActionInterfaces> = (
   action: UserActionInterfaces
 ) => {
   switch (action.type) {
-    case UserActionTypes.SET_BOOKING:
+    case UserActionTypes.SET_BOOKED:
       return {
         ...state,
-        booking: action.payload,
+        booked: action.payload,
+      };
+    case UserActionTypes.SET_DATE:
+      return {
+        ...state,
+        date: action.payload,
+      };
+    case UserActionTypes.SET_TIME:
+      return {
+        ...state,
+        time: action.payload,
       };
     default:
       return { ...state };

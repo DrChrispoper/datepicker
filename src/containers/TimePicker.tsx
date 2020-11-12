@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, FlatList, ScrollView, Text } from 'react-native';
 import moment from 'moment';
+import { LogBox } from 'react-native';
 import TimeComponent from '../components/TimeComponent';
 import {
   dayStartHour,
@@ -11,6 +12,10 @@ import {
 } from '../utils/constants';
 
 export default function TimePicker() {
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, []);
+
   var start = moment()
     .hour(dayStartHour)
     .minute(dayStartMinute)
@@ -32,13 +37,11 @@ export default function TimePicker() {
     }
   }
 
-  const renderItem = ({ item }) => (
-    <TimeComponent title={item.format('HH:mm')} />
-  );
+  const renderItem = ({ item }) => <TimeComponent time={item} />;
 
   return (
     <ScrollView style={styles.container}>
-      <Text>MORNING</Text>
+      <Text style={styles.title}>MORNING</Text>
       <FlatList
         data={morning}
         renderItem={renderItem}
@@ -46,7 +49,7 @@ export default function TimePicker() {
         numColumns={4}
         columnWrapperStyle={styles.row}
       />
-      <Text>AFTERNOON</Text>
+      <Text style={styles.title}>AFTERNOON</Text>
       <FlatList
         data={afternoon}
         renderItem={renderItem}
@@ -54,7 +57,7 @@ export default function TimePicker() {
         numColumns={4}
         columnWrapperStyle={styles.row}
       />
-      <Text>EVENING</Text>
+      <Text style={styles.title}>EVENING</Text>
       <FlatList
         data={evening}
         renderItem={renderItem}
@@ -74,5 +77,10 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     justifyContent: 'space-around',
+  },
+  title: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
 });

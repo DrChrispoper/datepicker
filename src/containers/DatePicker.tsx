@@ -12,9 +12,7 @@ export default function DatePicker() {
     days.push(moment(now).add(index, 'days'));
   }
 
-  const renderItem = ({ item }) => (
-    <DateComponent title={item.format('ddd DD')} />
-  );
+  const renderItem = ({ item }) => <DateComponent day={item} />;
 
   return (
     <View style={styles.container}>
