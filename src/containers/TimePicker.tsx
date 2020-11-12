@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, FlatList, View } from 'react-native';
-import moment, { relativeTimeRounding } from 'moment';
+import { StyleSheet, FlatList, ScrollView, Text } from 'react-native';
+import moment from 'moment';
 import TimeComponent from '../components/TimeComponent';
 import {
   dayStartHour,
@@ -17,29 +17,52 @@ export default function TimePicker() {
     .seconds(0)
     .milliseconds(0);
   var end = moment().hour(dayEndHour).minute(dayEndMinute);
-  let times = [moment(start)];
+  let morning = [moment(start)];
+  let afternoon = [];
+  let evening = [moment(end)];
 
   while (start.isBefore(end)) {
     start.add(interval, 'minutes');
-    times.push(moment(start));
+    if (start.hours() < 12) {
+      morning.push(moment(start));
+    } else if (start.hours() < 19) {
+      afternoon.push(moment(start));
+    } else {
+      evening.push(moment(start));
+    }
   }
-
-  times.push(moment(end));
 
   const renderItem = ({ item }) => (
     <TimeComponent title={item.format('HH:mm')} />
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <Text>MORNING</Text>
       <FlatList
-        data={times}
+        data={morning}
         renderItem={renderItem}
         keyExtractor={item => item.format('HH:mm')}
         numColumns={4}
         columnWrapperStyle={styles.row}
       />
-    </View>
+      <Text>AFTERNOON</Text>
+      <FlatList
+        data={afternoon}
+        renderItem={renderItem}
+        keyExtractor={item => item.format('HH:mm')}
+        numColumns={4}
+        columnWrapperStyle={styles.row}
+      />
+      <Text>EVENING</Text>
+      <FlatList
+        data={evening}
+        renderItem={renderItem}
+        keyExtractor={item => item.format('HH:mm')}
+        numColumns={4}
+        columnWrapperStyle={styles.row}
+      />
+    </ScrollView>
   );
 }
 

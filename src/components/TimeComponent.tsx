@@ -4,10 +4,10 @@ import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({
   item: {
     backgroundColor: '#f9c2ff',
-    margin: 5,
+    margin: 10,
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
   },
 });
 
