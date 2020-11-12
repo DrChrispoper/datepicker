@@ -21,10 +21,12 @@ export default function TimePicker() {
     .minute(dayStartMinute)
     .seconds(0)
     .milliseconds(0);
-  var end = moment().hour(dayEndHour).minute(dayEndMinute);
+  var end = moment()
+    .hour(dayEndHour)
+    .minute(dayEndMinute - 1);
   let morning = [moment(start)];
   let afternoon = [];
-  let evening = [moment(end)];
+  let evening = [];
 
   while (start.isBefore(end)) {
     start.add(interval, 'minutes');

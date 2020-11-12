@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDate } from '../redux/actions';
+import { setDate, setTime } from '../redux/actions';
 import { ApplicationState } from '../redux/store';
 import moment from 'moment';
 
@@ -30,6 +30,7 @@ const DateComponent = ({ day }: Props) => {
   const { date } = useSelector((state: ApplicationState) => state.user);
 
   const selectDate = () => {
+    dispatch(setTime(''));
     dispatch(setDate(`${day.dayOfYear()}`));
   };
 
