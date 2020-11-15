@@ -7,7 +7,9 @@ import moment from 'moment';
 
 const styles = StyleSheet.create({
   item: {
-    margin: 10,
+    padding: 10,
+    height: 60,
+    width: '25%',
   },
   title: {
     fontSize: 28,
@@ -39,10 +41,9 @@ const TimeComponent = ({ time }) => {
   const isSelectedTime = selectedTime == time.format('HH:mm');
 
   return (
-    <TouchableOpacity onPress={selectTime}>
+    <TouchableOpacity onPress={selectTime} style={styles.item}>
       <View
         style={[
-          styles.item,
           isSelectedTime && styles.selectedItem,
           isBeforeNow && styles.disabled,
         ]}
